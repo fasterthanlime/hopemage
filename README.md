@@ -5,7 +5,7 @@ this one will eventually amount to something.
 
 ### Authors
 
-  * Awos Menger
+  * [Amos Wenger](https://amos.me/)
   
 ### Links
 
