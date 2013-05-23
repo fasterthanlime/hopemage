@@ -4,3 +4,6 @@ Description: Generates documentation when it feels like it.
 SourcePath: source
 Main: hopemage/homa
 
+Requires: nagaqueen
+Additionals: nagaqueen-packed/nagaqueen.c
+
