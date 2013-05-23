@@ -1,0 +1,6 @@
+Name: hopemage
+Version: 0.1
+Description: Generates documentation when it feels like it.
+SourcePath: source
+Main: hopemage/homa
+

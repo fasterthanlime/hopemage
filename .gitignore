@@ -1,0 +1,7 @@
+.libs
+rock_tmp
+
+# executables
+homa
+*.exe
+
