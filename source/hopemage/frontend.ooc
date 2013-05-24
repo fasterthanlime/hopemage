@@ -17,6 +17,7 @@ Frontend: class extends OocListener {
     init: func (=sourcePath, path: String) {
         (libFolder, spec) := sourcePath split(path)
         module = Module new(spec)
+        libFolder add(module)
         parse(path)
     }
 

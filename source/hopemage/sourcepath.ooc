@@ -3,6 +3,9 @@
 import io/File
 import structs/[ArrayList]
 
+// our stuff
+import hopemage/[ast]
+
 /**
  * A list of places where to look for an ooc file.
  *
@@ -19,16 +22,15 @@ import structs/[ArrayList]
  */
 SourcePath: class {
 
-    libFolders := ArrayList<String> new()
+    libFolders := ArrayList<LibFolder> new()
 
-    add: func (libFolder: String) {
-        file := File new(libFolder)
-        libFolders add(file getAbsolutePath())
+    add: func (libPath: String) {
+        libFolders add(LibFolder new(libPath))
     }
 
     locate: func (spec: String) -> File {
         for (libFolder in libFolders) {
-            file := File new(libFolder, spec + ".ooc")
+            file := File new(libFolder path, spec + ".ooc")
             if (file exists?()) {
                 return file
             }
@@ -36,19 +38,43 @@ SourcePath: class {
         null
     }
 
-    split: func (path: String) -> (String, String) {
+    split: func (path: String) -> (LibFolder, String) {
         path = File new(path) getAbsolutePath()
         for (libFolder in libFolders) {
-            if (path startsWith?(libFolder)) {
-                return (path, spec(libFolder, path))
+            if (path startsWith?(libFolder path)) {
+                return (libFolder, libFolder toSpec(path))
             }
         }
 
         (null, null)
     }
 
-    spec: func (libFolder, path: String) -> String {
-        path substring(libFolder size) trimLeft(File separator)
+}
+
+/**
+ * A folder containing .ooc files, which are in turn
+ * parsed into modules.
+ */
+LibFolder: class {
+
+    path: String
+    modules := ArrayList<Module> new()
+
+    init: func (libPath: String) {
+        path = File new(libPath) getAbsolutePath()
+    }
+
+    add: func (module: Module) {
+        module libFolder = this
+        modules add(module)
+    }
+
+    contains?: func (module: Module) -> Bool {
+        modules contains?(module)
+    }
+
+    toSpec: func (path: String) -> String {
+        path substring(this path size) trimLeft(File separator)
     }
 
 }

@@ -63,7 +63,7 @@ Homa: class {
     parse: func {
         project := Project new(sourcePath)
 
-        for (module in project mainSet modules) {
+        for (module in project mainFolder modules) {
             "## %s" printfln(module spec)
             for (type in module types) {
                 "## %s\n\n'''%s'''\n\n" printfln(type name, type doc raw)

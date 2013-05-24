@@ -2,10 +2,15 @@
 // sdk stuff
 import structs/ArrayList
 
+// our stuff
+import hopemage/[sourcepath]
+
 /**
  * An ooc file containing types and stuff
  */
 Module: class {
+
+    libFolder: LibFolder
 
     imports := ArrayList<Import> new()
     types := ArrayList<Type> new()

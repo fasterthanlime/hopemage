@@ -15,52 +15,27 @@ import hopemage/[ast, frontend, sourcepath]
 Project: class {
 
     sourcePath: SourcePath
-    mainSet: ModuleSet
+    mainFolder: LibFolder
 
     init: func (=sourcePath) {
-        libFolder := sourcePath libFolders first()
-        if (!libFolder) {
+        if (sourcePath libFolders empty?()) {
             raise("SourcePath is empty, bailing out!")
         }
-        mainSet = ModuleSet new(libFolder)
-        parseSet(mainSet)
+        mainFolder = sourcePath libFolders first()
+        parseFolder(mainFolder)
     }
 
-    parseSet: func (moduleSet: ModuleSet) {
-        File new(moduleSet libFolder) walk(|f| 
+    parseFolder: func (libFolder: LibFolder) {
+        File new(libFolder path) walk(|f| 
             if (f path endsWith?(".ooc")) {
-                parse(f path, moduleSet)
+                parse(f path)
             }
             true
         )
     }
 
-    parse: func (path: String, modules: ModuleSet) {
-        frontend := Frontend new(sourcePath, path)
-        mainSet add(frontend module)
-    }
-
-}
-
-/**
- * A set of modules that all live in the same
- * path element. 
- *
- * @see SourcePath
- */
-ModuleSet: class {
-
-    libFolder: String
-    modules := ArrayList<Module> new()
-
-    init: func (=libFolder)
-
-    add: func (module: Module) {
-        modules add(module)
-    }
-
-    contains?: func (module: Module) -> Bool {
-        modules contains?(module)
+    parse: func (path: String) {
+        Frontend new(sourcePath, path)
     }
 
 }
