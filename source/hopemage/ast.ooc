@@ -12,7 +12,6 @@ Module: class {
 
     libFolder: LibFolder
 
-    imports := ArrayList<Import> new()
     types := ArrayList<Type> new()
     spec: String
 
@@ -46,17 +45,6 @@ Doc: class {
     parse: static func (input: String) -> This {
         This new(input)
     }
-
-}
-
-/**
- * An import, that can be relative, absolute, etc.
- */
-Import: class {
-
-    path: String
-
-    init: func (=path)
 
 }
 
