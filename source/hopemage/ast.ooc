@@ -2,14 +2,22 @@
 // sdk stuff
 import structs/ArrayList
 
+/**
+ * An ooc file containing types and stuff
+ */
 Module: class {
 
-   types := ArrayList<Type> new()
+    imports := ArrayList<Import> new()
+    types := ArrayList<Type> new()
+    spec: String
 
-   init: func
+    init: func (=spec)
 
 }
 
+/**
+ * An ooc type, like a class, a cover, etc.
+ */
 Type: class {
 
     name: String
@@ -19,6 +27,9 @@ Type: class {
 
 }
 
+/**
+ * A documentation string
+ */
 Doc: class {
 
     raw: String
@@ -28,6 +39,17 @@ Doc: class {
     parse: static func (input: String) -> This {
         This new(input)
     }
+
+}
+
+/**
+ * An import, that can be relative, absolute, etc.
+ */
+Import: class {
+
+    path: String
+
+    init: func (=path)
 
 }
 

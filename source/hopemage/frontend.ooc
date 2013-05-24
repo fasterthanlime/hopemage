@@ -4,14 +4,22 @@ use nagaqueen
 import nagaqueen/[OocListener]
 
 // our stuff
-import hopemage/[ast]
+import hopemage/[ast, project]
 
+/**
+ * Parses ooc files into modules
+ */
 Frontend: class extends OocListener {
 
     module: Module
+    sourcePath: SourcePath
 
-    init: func {
-        module = Module new()
+    init: func (=sourcePath)
+
+    parse: func (path: String) {
+        (pathElement, spec) := sourcePath map(path)
+        module = Module new(spec)
+        super()
     }
 
     strict?: func -> Bool {
