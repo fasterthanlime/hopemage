@@ -5,7 +5,7 @@ import text/StringTokenizer
 
 // our stuff
 use hopemage
-import hopemage/[frontend, ast, project]
+import hopemage/[frontend, ast, project, sourcepath]
 
 main: func (args: ArrayList<String>) {
     app := Homa new()
@@ -19,18 +19,17 @@ Homa: class {
 
     versionString := "0.1"
     sourcePath := SourcePath new()
-    path: String
     
     init: func 
 
     handle: func (args: ArrayList<String>) {
         parseArgs(args)
 
-        if (path) {
-            parse()
-        } else {
+        if (sourcePath libFolders empty?()) {
             usage()
             exit(0)
+        } else {
+            parse()
         }
     }
 
@@ -38,11 +37,6 @@ Homa: class {
         args removeAt(0)
 
         for (arg in args) {
-            if (!arg contains?('=')) {
-                path = arg
-                continue
-            }
-
             tokens := arg split('=')
             if (tokens size != 2) {
                 onInvalidArg(arg)
@@ -67,7 +61,7 @@ Homa: class {
     }
 
     parse: func {
-        project := Project new(sourcePath, path)
+        project := Project new(sourcePath)
 
         for (module in project mainSet modules) {
             "## %s" printfln(module spec)

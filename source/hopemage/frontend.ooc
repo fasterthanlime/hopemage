@@ -4,7 +4,7 @@ use nagaqueen
 import nagaqueen/[OocListener]
 
 // our stuff
-import hopemage/[ast, project]
+import hopemage/[ast, project, sourcepath]
 
 /**
  * Parses ooc files into modules
@@ -14,12 +14,10 @@ Frontend: class extends OocListener {
     module: Module
     sourcePath: SourcePath
 
-    init: func (=sourcePath)
-
-    parse: func (path: String) {
-        (pathElement, spec) := sourcePath map(path)
+    init: func (=sourcePath, path: String) {
+        (libFolder, spec) := sourcePath split(path)
         module = Module new(spec)
-        super()
+        parse(path)
     }
 
     strict?: func -> Bool {
