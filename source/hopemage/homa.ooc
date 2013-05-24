@@ -66,7 +66,7 @@ Homa: class {
         for (module in project mainFolder modules) {
             "## %s" printfln(module spec)
             for (type in module types) {
-                "## %s\n\n'''%s'''\n\n" printfln(type name, type doc raw)
+                "### %s\n\n```%s```\n\n" printfln(type name, type doc raw)
             }
         }
     }

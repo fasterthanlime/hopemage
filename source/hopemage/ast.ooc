@@ -16,7 +16,9 @@ Module: class {
     types := ArrayList<Type> new()
     spec: String
 
-    init: func (=spec)
+    init: func (=libFolder, =spec) {
+        libFolder add(this)
+    }
 
 }
 
