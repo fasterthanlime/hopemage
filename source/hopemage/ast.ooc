@@ -55,9 +55,9 @@ Doc: class {
  */
 Import: class {
 
-    path: String
+    spec: String
 
-    init: func (=path)
+    init: func (=spec)
 
 }
 

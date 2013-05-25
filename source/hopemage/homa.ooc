@@ -62,14 +62,17 @@ Homa: class {
 
     parse: func {
         project := Project new(sourcePath)
+        //print(project)
+    }
 
+    print: func (project: Project) {
         for (module in project mainFolder modules) {
             "# %s" printfln(module spec)
 
             "## Imports" printfln()
 
             for (imp in module imports) {
-                "### %s" printfln(imp path)
+                "### %s" printfln(imp spec)
             }
             println()
 

@@ -73,6 +73,16 @@ LibFolder: class {
         modules contains?(module)
     }
 
+    getCached: func ~spec (spec: String) -> Module {
+        for (module in modules) {
+            if (module spec == spec) {
+                return module
+            }
+        }
+
+        null
+    }
+
     toSpec: func (path: String) -> String {
         path substring(this path size) trimLeft(File separator)
     }
