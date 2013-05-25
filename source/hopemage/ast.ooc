@@ -12,7 +12,9 @@ Module: class {
 
     libFolder: LibFolder
 
+    imports := ArrayList<Import> new()
     types := ArrayList<Type> new()
+
     spec: String
 
     init: func (=libFolder, =spec) {
@@ -45,6 +47,17 @@ Doc: class {
     parse: static func (input: String) -> This {
         This new(input)
     }
+
+}
+
+/**
+ * Importing an other ooc file to use it
+ */
+Import: class {
+
+    path: String
+
+    init: func (=path)
 
 }
 

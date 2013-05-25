@@ -64,9 +64,19 @@ Homa: class {
         project := Project new(sourcePath)
 
         for (module in project mainFolder modules) {
-            "## %s" printfln(module spec)
+            "# %s" printfln(module spec)
+
+            "## Imports" printfln()
+
+            for (imp in module imports) {
+                "### %s" printfln(imp path)
+            }
+            println()
+
+            "## Types" printfln()
+
             for (type in module types) {
-                "### %s\n\n```%s```\n\n" printfln(type name, type doc raw)
+                "### %s\n\n```%s```\n" printfln(type name, type doc raw)
             }
         }
     }

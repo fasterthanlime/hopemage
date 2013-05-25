@@ -29,4 +29,12 @@ Frontend: class extends OocListener {
         module types add(type)
     }
 
+    onImport: func (path, name: CString) {
+        importPath := name toString()
+        if (path) {
+            importPath = path toString() + importPath
+        }
+        module imports add(Import new(importPath))
+    }
+
 }
