@@ -4,4 +4,5 @@ rock_tmp
 # executables
 homa
 *.exe
+*.dSYM
 
